@@ -16,7 +16,7 @@ public class TwitchOAuth : MonoBehaviour
     private readonly string twitchBanUrl = "https://api.twitch.tv/helix/moderation/bans";
     private readonly string twitchAuthUrl = "https://id.twitch.tv/oauth2/authorize";
     private readonly string twitchVipUrl = "https://api.twitch.tv/helix/channels/vips";
-
+    
     private readonly string twitchRedirectUrl = "http://localhost:8080/";
     private readonly string loginSuccessUrl = "https://rociotome.com/success-numerica-login";
     private readonly string loginFailUrl = "https://rociotome.com/fail-numerica-login";
@@ -32,10 +32,10 @@ public class TwitchOAuth : MonoBehaviour
     private HttpClient httpClient = new HttpClient();
     private HttpListener httpListener;
     
-    private bool enableTimeout = true;
-    private bool enableVip = true;
-    private bool enableModImmunity = false;
-    private int timeoutMultiplier = 10;
+    private const bool enableTimeout = true;
+    private const bool enableVip = true;
+    private const bool enableModImmunity = false;
+    private const int timeoutMultiplier = 300;
 
     #region Singleton
     public static TwitchOAuth Instance { get; private set; }
@@ -63,21 +63,6 @@ public class TwitchOAuth : MonoBehaviour
         InvokeRepeating(nameof(ValidateToken), 3600, 3600);
     }
     
-    public void SetTimeoutOption(bool state)
-    {
-        enableTimeout = state;
-    }
-
-    public void SetVipOption(bool state)
-    {
-        enableVip = state;
-    }
-
-    public void SetModImmunityOption(bool state)
-    {
-        enableModImmunity = state;
-    }
-
     public bool IsVipEnabled()
     {
         return enableVip;
@@ -86,12 +71,6 @@ public class TwitchOAuth : MonoBehaviour
     public bool IsModImmunityEnabled()
     {
         return enableModImmunity;
-    }
-    
-    public void SetTimeoutMultiplayer(string multiplier)
-    {
-        int.TryParse(multiplier, out timeoutMultiplier);
-        if (timeoutMultiplier < 1) timeoutMultiplier = 10;
     }
 
     public bool Timeout(string targetUserId, int failedNumber)
@@ -185,6 +164,7 @@ public class TwitchOAuth : MonoBehaviour
             }
             else
             {
+                Debug.Log("error twitchAuthStateVerify");
                 string responseString = $"<html><body><script>window.location.replace(\"{loginFailUrl}\");</script></body></html>";
                 SendResponse(httpContext, responseString);
             
@@ -192,6 +172,7 @@ public class TwitchOAuth : MonoBehaviour
             }
         }else if (tokens.Contains("error"))
         {
+            Debug.Log($"error token {tokens}");
             string responseString = $"<html><body><script>window.location.replace(\"{loginFailUrl}\");</script></body></html>";
             SendResponse(httpContext, responseString);
             

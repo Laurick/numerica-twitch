@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using TwitchChat;
 using UnityEngine;
@@ -8,7 +9,11 @@ public class CounterTwitchGame : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentScoreTMP;
     [SerializeField] private TextMeshProUGUI maxScoreTMP;
 
+    // keeps the current session score
     private int currentScore;
+    
+    // keeps the current number in count
+    private int currentNumber;
 
     private string lastUsername = string.Empty;
 
@@ -25,6 +30,11 @@ public class CounterTwitchGame : MonoBehaviour
 
     [SerializeField] private GameObject startingCanvas;
 
+    private List<Rule> rules;
+    private Rule activeRule;
+
+    private float lastMessageTimestamp;
+    
     private void Start()
     {
         Application.targetFrameRate = 30;
@@ -39,6 +49,15 @@ public class CounterTwitchGame : MonoBehaviour
         UpdateMaxScoreUI();
         UpdateCurrentScoreUI(lastUsername, currentScore.ToString());
         ResetGame();
+        
+        // TODO: find a collection with some weights
+        rules = new()
+        {
+            new NextPositiveInt(),
+            new PreviousPositiveInt(),
+            new NextIntInNegative()
+        };
+        activeRule = rules[0];
     }
 
     private void OnDestroy()
@@ -50,17 +69,20 @@ public class CounterTwitchGame : MonoBehaviour
     private void OnTwitchMessageReceived(Chatter chatter)
     {
         if (!int.TryParse(chatter.message, out int response)) return;
-
+        
         string displayName = chatter.IsDisplayNameFontSafe() ? chatter.tags.displayName : chatter.login;
 
         if (lastUsername.Equals(displayName)) return;
-
-        if (response == currentScore + 1) HandleCorrectResponse(displayName, chatter);
+        
+        AnswerInfo answerInfo = new AnswerInfo(response, currentNumber, chatter, Time.time-lastMessageTimestamp);
+        lastMessageTimestamp = Time.time;
+        if (activeRule.isCorrectAnswer(answerInfo)) HandleCorrectResponse(displayName, chatter, response);
         else HandleIncorrectResponse(displayName, chatter);
     }
 
-    private void HandleCorrectResponse(string displayName, Chatter chatter)
+    private void HandleCorrectResponse(string displayName, Chatter chatter, int response)
     {
+        currentNumber = response;
         currentScore++;
         UpdateCurrentScoreUI(displayName, currentScore.ToString());
 
@@ -70,11 +92,19 @@ public class CounterTwitchGame : MonoBehaviour
             SetMaxScore(displayName, currentScore);
             HandleVIPStatusUpdate(chatter);
         }
+
+        activeRule = getNextRule();
+    }
+
+    private Rule getNextRule()
+    {
+        // TODO check weights
+        return rules[Random.Range(0, rules.Count-1)];
     }
 
     private void HandleIncorrectResponse(string displayName, Chatter chatter)
     {
-        if (currentScore != 0)
+        if (currentNumber != 0)
         {
             DisplayShameMessage(displayName);
 
@@ -217,6 +247,7 @@ public class CounterTwitchGame : MonoBehaviour
     {
         lastUsername = "";
         currentScore = 0;
+        currentNumber = 0;
         currentScoreTMP.SetText(currentScore.ToString());
     }
 }
