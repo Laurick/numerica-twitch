@@ -6,7 +6,7 @@ public class SuscriptorRule : Rule
 
     public SuscriptorRule() : base()
     {
-        description = "suscriptior only";
+        description = "suscriptors only";
     }
     
     public override bool isCorrectAnswer(AnswerInfo answerInfo)

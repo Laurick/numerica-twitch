@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using TwitchChat;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CounterTwitchGame : MonoBehaviour
 {
@@ -50,12 +52,14 @@ public class CounterTwitchGame : MonoBehaviour
         UpdateCurrentScoreUI(lastUsername, currentScore.ToString());
         ResetGame();
         
-        // TODO: find a collection with some weights
-        rules = new()
+        rules = new List<Rule>
         {
             new NextPositiveInt(),
             new PreviousPositiveInt(),
-            new NextIntInNegative()
+            new NextIntInNegative(),
+            new ButtonicaRule(),
+            new FiveMutipleRule(),
+            new SuscriptorRule()
         };
         activeRule = rules[0];
     }
@@ -93,13 +97,31 @@ public class CounterTwitchGame : MonoBehaviour
             HandleVIPStatusUpdate(chatter);
         }
 
+        activeRule.ExecutePostConditions();
         activeRule = getNextRule();
+        activeRule.ExecutePreConditions();
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TwitchController.SendChatMessage("/list");
+        }
     }
 
     private Rule getNextRule()
     {
-        // TODO check weights
-        return rules[Random.Range(0, rules.Count-1)];
+        int percentage = Random.Range(0, 101);
+        var index = percentage switch
+        {
+            >= 80 and < 90 => 1,
+            >= 91 and < 92 => 2,
+            >= 92 and < 93 => 3,
+            >= 93 and < 94 => 4,
+            >= 95 and < 96 => 5,
+            _ => 0
+        };
+        return rules[index];
     }
 
     private void HandleIncorrectResponse(string displayName, Chatter chatter)

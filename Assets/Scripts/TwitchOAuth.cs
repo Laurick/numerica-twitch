@@ -172,7 +172,7 @@ public class TwitchOAuth : MonoBehaviour
             }
         }else if (tokens.Contains("error"))
         {
-            Debug.Log($"error token {tokens}");
+            Debug.Log($"error token {string.Join(",", tokens)}");
             string responseString = $"<html><body><script>window.location.replace(\"{loginFailUrl}\");</script></body></html>";
             SendResponse(httpContext, responseString);
             
