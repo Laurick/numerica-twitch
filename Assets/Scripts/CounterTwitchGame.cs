@@ -13,6 +13,7 @@ public class CounterTwitchGame : MonoBehaviour
     [SerializeField] private TextMeshProUGUI maxScoreTMP;
     [SerializeField] private TextMeshProUGUI timeTMP;
     [SerializeField] private Image timeImage;
+    [SerializeField] private AnimationCurve timeCurve;
     
     private int currentScore;
 
@@ -28,7 +29,7 @@ public class CounterTwitchGame : MonoBehaviour
     
     private float maxTimeRound;
     private float timeRound;
-    private const float FirstRoundTime = 50.5f;
+    private const float FirstRoundTime = 30.5f;
 
     private float sessionTime = 0;
     
@@ -112,7 +113,7 @@ public class CounterTwitchGame : MonoBehaviour
 
         string displayName = getDisplayName(chatter);
 
-        if (lastChatters.Contains(chatter)) return;
+        //if (lastChatters.Contains(chatter)) return;
 
         if (response == currentScore + 1) HandleCorrectResponse(displayName, chatter);
         else HandleIncorrectResponse(displayName, chatter);
@@ -120,7 +121,8 @@ public class CounterTwitchGame : MonoBehaviour
 
     private void HandleCorrectResponse(string displayName, Chatter chatter)
     {
-        maxTimeRound = FirstRoundTime - (0.5f * currentScore);
+        float delta = FirstRoundTime*timeCurve.Evaluate(currentScore/100f);
+        maxTimeRound = (FirstRoundTime - delta)+0.5f;
         timeRound = maxTimeRound;
         currentScore++;
         UpdateCurrentScoreUI(displayName, currentScore.ToString());
@@ -179,7 +181,7 @@ public class CounterTwitchGame : MonoBehaviour
 
     private void DisplayShameMessage(string displayName)
     {
-        usernameTMP.SetText($"{displayName}<color=#65451F>tómate otro café!</color>");
+        usernameTMP.SetText($"{displayName}<color=#65451F> tómate otro café!</color>");
     }
 
     private void OnChannelJoined()
@@ -193,8 +195,6 @@ public class CounterTwitchGame : MonoBehaviour
         ResetGame();
     }
 
-    // revisar 
-    
     private void SetMaxScore(int score,float time)
     {
         currentMaxScore = score;
