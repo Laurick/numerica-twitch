@@ -33,7 +33,7 @@ public class TwitchOAuth : MonoBehaviour
     private HttpListener httpListener;
     
     private bool enableTimeout = true;
-    private bool enableVip = true;
+    private bool enableVip = false;
     private bool enableModImmunity = false;
     private int timeoutMultiplier = 10;
 
