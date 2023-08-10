@@ -1,23 +1,24 @@
 ﻿
 using UnityEngine;
 
-public class NextPositiveInt : Rule
+public class FirstRule : Rule
 {
     private int next;
-    public NextPositiveInt() : base()
+    
+    public FirstRule() : base()
     {
         description = "Do you know how to count? I don't think so.";
+        next = 1;
     }
-    
+
     public override int ExecutePreConditions(AnswerInfo previous)
     {
-        next = previous.answer + 1;
         return next - 1;
     }
     
     public override bool isCorrectAnswer(AnswerInfo answerInfo)
     {
-        Debug.Log($"NextPositive: {answerInfo.current} - {answerInfo.answer} - {next}");
+        Debug.Log($"First: {answerInfo.current} - {answerInfo.answer} - {next}");
         return answerInfo.answer == next;
     }
 

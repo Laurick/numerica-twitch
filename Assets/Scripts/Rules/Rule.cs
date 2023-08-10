@@ -1,38 +1,20 @@
-﻿using TwitchChat;
-using UnityEngine.Events;
-
+﻿
 public abstract class Rule
 {
-    public int type;
+    public const int NUMBER = 0;
+    public const int TEXT = 1;
     public string description;
-    public UnityAction preConditions;
-    public UnityAction postsConditions;
+    public int type;
 
     protected Rule()
     {
-   
+        type = NUMBER;
     }
 
-    protected Rule(UnityAction preConditions, UnityAction postsConditions)
-    {
-        this.preConditions = preConditions;
-        this.postsConditions = postsConditions;
-    }
-    
-    public void ExecutePreConditions()
-    {
-        preConditions?.Invoke();
-    }
-    
-    public void ExecutePostConditions()
-    {
-        postsConditions?.Invoke();
-    }
-    
+    public abstract int ExecutePreConditions(AnswerInfo previous);
+
     public abstract bool isCorrectAnswer(AnswerInfo answerInfo);
 
-    public virtual bool isRepeatable()
-    {
-        return false;
-    }
+    public abstract int getNextNumber();
+
 }

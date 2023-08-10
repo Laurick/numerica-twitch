@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public class SuscriptorRule : Rule
+public class StreamerRule : Rule
 {
     private int next;
     
-    public SuscriptorRule() : base()
+    public StreamerRule() : base()
     {
-        description = "Subscribers only. Subscribe it for play :P";
+        description = "Yep, the next only counts if the streamer post it";
     }
 
     public override int ExecutePreConditions(AnswerInfo previous)
@@ -17,12 +17,12 @@ public class SuscriptorRule : Rule
 
     public override bool isCorrectAnswer(AnswerInfo answerInfo)
     {
-        Debug.Log($"Suscriptor: {answerInfo.current} - {answerInfo.answer} - {next}");
+        Debug.Log($"Streamer: {answerInfo.current} - {answerInfo.answer} - {next}");
         foreach (var badge in answerInfo.chatter.tags.badges)
         {
             Debug.Log($"badges: {badge.id}");
         }
-        return answerInfo.answer == next && answerInfo.chatter.HasBadge("subscriber");
+        return answerInfo.answer == next && answerInfo.chatter.HasBadge("broadcaster");
     }
 
     public override int getNextNumber()

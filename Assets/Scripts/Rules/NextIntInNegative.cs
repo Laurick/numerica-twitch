@@ -1,15 +1,28 @@
 ﻿
-using TwitchChat;
+using UnityEngine;
 
 public class NextIntInNegative : Rule
 {
+    int next;
     public NextIntInNegative() : base()
     {
-        description = "next -> the next one but in negative";
+        description = "The next number is the next one but in oposite";
+    }
+    
+    public override int ExecutePreConditions(AnswerInfo previous)
+    {
+        next = previous.answer + 1;
+        return next - 1;
     }
     
     public override bool isCorrectAnswer(AnswerInfo answerInfo)
     {
-        return answerInfo.answer == -(answerInfo.current + 1);
+        Debug.Log($"NextIntNegative: {answerInfo.current} - {answerInfo.answer} - {next}");
+        return answerInfo.answer == (next*-1);
+    }
+
+    public override int getNextNumber()
+    {
+        return next;
     }
 }

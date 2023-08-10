@@ -1,23 +1,27 @@
 ﻿
 using UnityEngine;
 
-public class NextPositiveInt : Rule
+public class NextRandomInt : Rule
 {
     private int next;
-    public NextPositiveInt() : base()
+    
+    public NextRandomInt() : base()
     {
-        description = "Do you know how to count? I don't think so.";
+        description = "Opsie, that was the next number? >:)";
+        
     }
     
     public override int ExecutePreConditions(AnswerInfo previous)
     {
-        next = previous.answer + 1;
+        int n = previous.answer;
+        next = Random.Range(n+10, n+20);
+        next += 1;
         return next - 1;
     }
     
     public override bool isCorrectAnswer(AnswerInfo answerInfo)
     {
-        Debug.Log($"NextPositive: {answerInfo.current} - {answerInfo.answer} - {next}");
+        Debug.Log($"NextRandom: {answerInfo.current} - {answerInfo.answer} - {next}");
         return answerInfo.answer == next;
     }
 

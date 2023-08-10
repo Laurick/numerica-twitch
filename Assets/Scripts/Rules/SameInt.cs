@@ -1,23 +1,22 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PreviousPositiveInt : Rule
+public class SameInt : Rule
 {
     private int next;
-    public PreviousPositiveInt() : base()
+    public SameInt() : base()
     {
-        description = "Let's count backwards";
+        description = "Dont count up. Don't count down";
     }
 
     public override int ExecutePreConditions(AnswerInfo previous)
     {
-        next = previous.answer - 1;
-        return next+1;
+        next = previous.answer;
+        return next;
     }
-    
+
     public override bool isCorrectAnswer(AnswerInfo answerInfo)
     {
-        Debug.Log($"PreviousPositive: {answerInfo.current} - {answerInfo.answer} - {next}");
+        Debug.Log($"Same: {answerInfo.current} - {answerInfo.answer} - {next}");
         return answerInfo.answer == next;
     }
 

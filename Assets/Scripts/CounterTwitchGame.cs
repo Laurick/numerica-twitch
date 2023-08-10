@@ -7,9 +7,11 @@ using Random = UnityEngine.Random;
 
 public class CounterTwitchGame : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI ruleTMP;
     [SerializeField] private TextMeshProUGUI usernameTMP;
-    [SerializeField] private TextMeshProUGUI currentScoreTMP;
+    [SerializeField] private TextMeshProUGUI numberTMP;
     [SerializeField] private TextMeshProUGUI maxScoreTMP;
+    [SerializeField] private TextMeshProUGUI currentScoreTMP;
 
     // keeps the current session score
     private int currentScore;
@@ -48,10 +50,10 @@ public class CounterTwitchGame : MonoBehaviour
         currentMaxScoreUsername = PlayerPrefs.GetString(maxScoreUsernameKey, currentMaxScoreUsername);
         lastUserIdVIPGranted = PlayerPrefs.GetString(lastUserIdVIPGrantedKey, string.Empty);
 
+        ResetGame();
         UpdateMaxScoreUI();
         UpdateCurrentScoreUI(lastUsername, currentScore.ToString());
-        ResetGame();
-        
+        PrintActiveRule();
         rules = new List<Rule>
         {
             new NextPositiveInt(),
@@ -59,9 +61,18 @@ public class CounterTwitchGame : MonoBehaviour
             new NextIntInNegative(),
             new ButtonicaRule(),
             new FiveMutipleRule(),
-            new SuscriptorRule()
+            new SuscriptorRule(),
+            new StreamerRule(),
+            new SameInt(),
+            new NextRandomInt(),
+            new SlowRule(),
+            new QuickRule()
         };
-        activeRule = rules[0];
+    }
+
+    private void PrintActiveRule()
+    {
+        ruleTMP.SetText(activeRule.description);
     }
 
     private void OnDestroy()
@@ -72,15 +83,28 @@ public class CounterTwitchGame : MonoBehaviour
 
     private void OnTwitchMessageReceived(Chatter chatter)
     {
-        if (!int.TryParse(chatter.message, out int response)) return;
+        int response = 0;
+        if (activeRule.type == Rule.NUMBER)
+        {
+            if (!int.TryParse(chatter.message, out response)) return;
+        } 
+        else // text type
+        {
+            response = currentNumber + 1;
+        }
         
         string displayName = chatter.IsDisplayNameFontSafe() ? chatter.tags.displayName : chatter.login;
 
-        if (lastUsername.Equals(displayName)) return;
+        //if (lastUsername.Equals(displayName)) return;
         
         AnswerInfo answerInfo = new AnswerInfo(response, currentNumber, chatter, Time.time-lastMessageTimestamp);
         lastMessageTimestamp = Time.time;
-        if (activeRule.isCorrectAnswer(answerInfo)) HandleCorrectResponse(displayName, chatter, response);
+        if (activeRule.isCorrectAnswer(answerInfo))
+        {
+            HandleCorrectResponse(displayName, chatter, activeRule.getNextNumber());
+            int number = activeRule.ExecutePreConditions(answerInfo);
+            UpdateNumber(number == Int32.MinValue ? currentNumber : number);
+        }
         else HandleIncorrectResponse(displayName, chatter);
     }
 
@@ -97,28 +121,25 @@ public class CounterTwitchGame : MonoBehaviour
             HandleVIPStatusUpdate(chatter);
         }
 
-        activeRule.ExecutePostConditions();
         activeRule = getNextRule();
-        activeRule.ExecutePreConditions();
+        PrintActiveRule();
     }
-
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TwitchController.SendChatMessage("/list");
-        }
-    }
-
+    
     private Rule getNextRule()
     {
-        int percentage = Random.Range(0, 101);
+        int percentage = Random.Range(0, 100);
         var index = percentage switch
         {
-            >= 80 and < 90 => 1,
-            >= 91 and < 92 => 2,
-            >= 92 and < 93 => 3,
-            >= 93 and < 94 => 4,
-            >= 95 and < 96 => 5,
+            >= 45 and < 55 => 10,
+            >= 55 and < 60 => 1,
+            >= 60 and < 65 => 2,
+            >= 65 and < 70 => 3,
+            >= 70 and < 75 => 4,
+            >= 75 and < 80 => 5,
+            >= 80 and < 85 => 6,
+            >= 85 and < 90 => 7,
+            >= 90 and < 95 => 8,
+            >= 95 and < 99 => 9,
             _ => 0
         };
         return rules[index];
@@ -141,8 +162,10 @@ public class CounterTwitchGame : MonoBehaviour
             }
 
             HandleTimeout(chatter);
-            UpdateMaxScoreUI();
             ResetGame();
+            UpdateMaxScoreUI();
+            UpdateNumber(0);
+            PrintActiveRule();
         }
     }
 
@@ -262,14 +285,20 @@ public class CounterTwitchGame : MonoBehaviour
     private void UpdateCurrentScoreUI(string username, string score)
     {
         usernameTMP.SetText(username);
-        currentScoreTMP.SetText(score);
+        currentScoreTMP.SetText($"CURRENT: {score}");
     }
 
+    private void UpdateNumber(int number)
+    {
+        numberTMP.SetText(number.ToString());
+    }
+    
     private void ResetGame()
     {
+        activeRule = new FirstRule();
         lastUsername = "";
         currentScore = 0;
         currentNumber = 0;
-        currentScoreTMP.SetText(currentScore.ToString());
+        numberTMP.SetText(currentScore.ToString());
     }
 }

@@ -1,14 +1,31 @@
 ﻿
+using System;
+using UnityEngine;
+
 public class FiveMutipleRule : Rule
 {
+    private int next;
+    
     public FiveMutipleRule() : base()
     {
-        description = "Next in succeesion is multiple of 5";
+        description = "Next number is the next multiple of 5";
     }
-    
+
+    public override int ExecutePreConditions(AnswerInfo previous)
+    {
+        int answer = (previous.answer+5) / 5;
+        next = answer*5;
+        return Int32.MinValue;
+    }
+
     public override bool isCorrectAnswer(AnswerInfo answerInfo)
     {
-        int answer = (answerInfo.current+5) / 5;
-        return answerInfo.answer == answer;
+        Debug.Log($"Five: {answerInfo.current} - {answerInfo.answer} - {next}");
+        return answerInfo.answer == next;
+    }
+
+    public override int getNextNumber()
+    {
+        return next;
     }
 }
