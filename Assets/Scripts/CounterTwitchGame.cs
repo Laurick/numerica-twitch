@@ -95,7 +95,7 @@ public class CounterTwitchGame : MonoBehaviour
         
         string displayName = chatter.IsDisplayNameFontSafe() ? chatter.tags.displayName : chatter.login;
 
-        //if (lastUsername.Equals(displayName)) return;
+        if (lastUsername.Equals(displayName)) return;
         
         AnswerInfo answerInfo = new AnswerInfo(response, currentNumber, chatter, Time.time-lastMessageTimestamp);
         lastMessageTimestamp = Time.time;
