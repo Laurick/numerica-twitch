@@ -13,7 +13,7 @@ public class TitleBehaivour : MonoBehaviour
         "Ok, let's talk about it",
         "This is not numerica, I'm numerica+",
         "That means, it's numerica but with a twist. An evil one",
-        "The timeout multiplier is about 300 seconds",
+        "The timeout multiplier is about 60 seconds",
         "Mods are vulnerable",
         "But someone can win a VIP ;)",
         "Are you tired about chasing the (my) button?",

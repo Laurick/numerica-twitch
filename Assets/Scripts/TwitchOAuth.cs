@@ -35,7 +35,7 @@ public class TwitchOAuth : MonoBehaviour
     private const bool enableTimeout = true;
     private const bool enableVip = true;
     private const bool enableModImmunity = false;
-    private const int timeoutMultiplier = 300;
+    private const int timeoutMultiplier = 60;
 
     #region Singleton
     public static TwitchOAuth Instance { get; private set; }
