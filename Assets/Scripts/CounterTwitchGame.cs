@@ -113,7 +113,7 @@ public class CounterTwitchGame : MonoBehaviour
 
         string displayName = getDisplayName(chatter);
 
-        //if (lastChatters.Contains(chatter)) return;
+        if (lastChatters.Contains(chatter)) return;
 
         if (response == currentScore + 1) HandleCorrectResponse(displayName, chatter);
         else HandleIncorrectResponse(displayName, chatter);
