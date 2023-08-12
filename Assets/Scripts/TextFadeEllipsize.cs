@@ -21,7 +21,7 @@ public class TextFadeEllipsize : MonoBehaviour
         "El 1 de octubre de 86 a. C. nace Salustio un historiador romano. El 1 de octubre también es el dia mundial del café. No tienen nada que ver una cosa con la otra",
         "All praise the clock",
         "Los dos gatos más longevos del mundo tenían algo en común, ambos tomaban café. Sorprendente ¿no? (Correlación no implica causalidad).",
-        "El café es un buen fertilizante. Pero no te pases la medida suele estar entre una cucharadita de café y 8 kilos.",
+        "El café es un buen fertilizante. Pero no te pases. La medida suele estar entre una cucharadita de café y 8 kilos.",
         "Si lo piensas muy detenidamente, un café no es una ensalada."
     };
     public TextMeshProUGUI label;
