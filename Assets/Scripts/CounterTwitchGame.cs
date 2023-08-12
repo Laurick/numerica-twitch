@@ -29,7 +29,7 @@ public class CounterTwitchGame : MonoBehaviour
     
     private float maxTimeRound;
     private float timeRound;
-    private const float FirstRoundTime = 30.5f;
+    private const float FirstRoundTime = 20f;
 
     private float sessionTime = 0;
     
@@ -67,7 +67,7 @@ public class CounterTwitchGame : MonoBehaviour
         timeRound -= Time.deltaTime;
         timeImage.fillAmount = (float)(timeRound / maxTimeRound);
 
-        if (timeRound < 3)
+        if (timeRound < 5)
         {
             float newAlpha = timeRound % 1;
             timeImage.color = new Color(timeImage.color.r,timeImage.color.g,timeImage.color.b,newAlpha);
