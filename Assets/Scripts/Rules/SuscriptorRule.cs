@@ -6,7 +6,7 @@ public class SuscriptorRule : Rule
     
     public SuscriptorRule() : base()
     {
-        description = "Subscribers only. Subscribe it for play :P";
+        description = "Subscribers only. Subscribe now for play :P";
     }
 
     public override int ExecutePreConditions(AnswerInfo previous)
@@ -17,7 +17,7 @@ public class SuscriptorRule : Rule
 
     public override bool isCorrectAnswer(AnswerInfo answerInfo)
     {
-        Debug.Log($"Suscriptor: {answerInfo.current} - {answerInfo.answer} - {next}");
+        // Debug.Log($"Suscriptor: {answerInfo.current} - {answerInfo.answer} - {next}");
         foreach (var badge in answerInfo.chatter.tags.badges)
         {
             Debug.Log($"badges: {badge.id}");

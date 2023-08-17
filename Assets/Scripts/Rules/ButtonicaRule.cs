@@ -21,7 +21,7 @@ public class ButtonicaRule : Rule
 
     public override bool isCorrectAnswer(AnswerInfo answerInfo)
     {
-        Debug.Log($"Butonica: {answerInfo.current} - {answerInfo.answer} - {next}");
+        // Debug.Log($"Butonica: {answerInfo.current} - {answerInfo.answer} - {next}");
         return validStrings.Contains(answerInfo.chatter.message);
     }
     

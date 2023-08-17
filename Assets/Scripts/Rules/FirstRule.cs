@@ -18,7 +18,7 @@ public class FirstRule : Rule
     
     public override bool isCorrectAnswer(AnswerInfo answerInfo)
     {
-        Debug.Log($"First: {answerInfo.current} - {answerInfo.answer} - {next}");
+        // Debug.Log($"First: {answerInfo.current} - {answerInfo.answer} - {next}");
         return answerInfo.answer == next;
     }
 

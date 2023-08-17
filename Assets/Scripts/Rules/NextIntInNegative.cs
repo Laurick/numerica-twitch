@@ -6,7 +6,7 @@ public class NextIntInNegative : Rule
     int next;
     public NextIntInNegative() : base()
     {
-        description = "The next number is the next one but in oposite";
+        description = "The next number is the next one but in opposite";
     }
     
     public override int ExecutePreConditions(AnswerInfo previous)
@@ -17,7 +17,7 @@ public class NextIntInNegative : Rule
     
     public override bool isCorrectAnswer(AnswerInfo answerInfo)
     {
-        Debug.Log($"NextIntNegative: {answerInfo.current} - {answerInfo.answer} - {next}");
+        // Debug.Log($"NextIntNegative: {answerInfo.current} - {answerInfo.answer} - {next}");
         return answerInfo.answer == (next*-1);
     }
 

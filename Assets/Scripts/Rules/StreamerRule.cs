@@ -6,7 +6,7 @@ public class StreamerRule : Rule
     
     public StreamerRule() : base()
     {
-        description = "Yep, the next only counts if the streamer post it";
+        description = "Yep, the next only counts if the streamer post it. Send some bits or send !hey or do nothing. They are ignoring you.";
     }
 
     public override int ExecutePreConditions(AnswerInfo previous)

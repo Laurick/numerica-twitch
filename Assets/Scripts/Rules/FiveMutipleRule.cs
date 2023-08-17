@@ -20,7 +20,7 @@ public class FiveMutipleRule : Rule
 
     public override bool isCorrectAnswer(AnswerInfo answerInfo)
     {
-        Debug.Log($"Five: {answerInfo.current} - {answerInfo.answer} - {next}");
+        // Debug.Log($"Five: {answerInfo.current} - {answerInfo.answer} - {next}");
         return answerInfo.answer == next;
     }
 

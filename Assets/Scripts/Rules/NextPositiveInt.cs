@@ -17,7 +17,7 @@ public class NextPositiveInt : Rule
     
     public override bool isCorrectAnswer(AnswerInfo answerInfo)
     {
-        Debug.Log($"NextPositive: {answerInfo.current} - {answerInfo.answer} - {next}");
+        // Debug.Log($"NextPositive: {answerInfo.current} - {answerInfo.answer} - {next}");
         return answerInfo.answer == next;
     }
 

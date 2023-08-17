@@ -6,7 +6,7 @@ public class QuickRule : Rule
     
     public QuickRule() : base()
     {
-        description = "Quick, next numbers, you only have 3 seconds";
+        description = "Quick, next number, you only have... 300 Jiffys? Really?";
     }
 
     public override int ExecutePreConditions(AnswerInfo previous)
