@@ -18,7 +18,7 @@ public class CounterTwitchGame : MonoBehaviour
     private int currentScore;
 
     private int maxUsersPermited;
-    private Queue<Chatter> lastChatters = new();
+    private Queue<CustomChatter> lastChatters = new();
     private Chatter lastChatter;
 
     private int currentMaxScore;
@@ -113,7 +113,7 @@ public class CounterTwitchGame : MonoBehaviour
 
         string displayName = getDisplayName(chatter);
 
-        if (lastChatters.Contains(chatter)) return;
+        if (lastChatters.Contains(new CustomChatter(chatter))) return;
 
         if (response == currentScore + 1) HandleCorrectResponse(displayName, chatter);
         else HandleIncorrectResponse(displayName, chatter);
@@ -129,7 +129,7 @@ public class CounterTwitchGame : MonoBehaviour
 
         if (lastChatters.Count == maxUsersPermited)
             lastChatters.Dequeue();
-        lastChatters.Enqueue(chatter);
+        lastChatters.Enqueue(new CustomChatter(chatter));
         lastChatter = chatter;
         timeImage.color = new Color(timeImage.color.r,timeImage.color.g,timeImage.color.b,1);
         
