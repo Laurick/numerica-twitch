@@ -21,4 +21,4 @@ Good luck!
 This game has been developed thanks to a RothioTome and her great game Numerica <3
 
 ## License
-This project is released under the GPLv3 License by RothioTome (2023)
+This project is released under the GPLv3 License by Ildesir (2023)
