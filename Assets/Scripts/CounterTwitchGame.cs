@@ -166,6 +166,12 @@ public class CounterTwitchGame : MonoBehaviour
     
     private void HandleTimeout(Chatter chatter)
     {
+        if (currentScore == 0)
+        {
+            // Debug.Log("safeguard");
+            return;
+        }
+        
         if (TwitchOAuth.Instance.IsModImmunityEnabled())
         {
             if (!chatter.HasBadge("moderator"))
