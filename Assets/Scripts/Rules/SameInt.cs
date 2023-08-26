@@ -5,7 +5,7 @@ public class SameInt : Rule
     private int next;
     public SameInt() : base()
     {
-        description = "Dont count up. Don't count down";
+        description = "No conteis hacia adelante, tampoco hacia atrás.";
     }
 
     public override int ExecutePreConditions(AnswerInfo previous)

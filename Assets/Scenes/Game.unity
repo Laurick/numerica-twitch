@@ -548,9 +548,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'HIGH SCORE: 1
-
-    by whoever'
+  m_text: "PUNTUACI\xD3N M\xC1XIMA: 1\npor whoever"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7cd9337368586d74089447414d72a968, type: 2}
   m_sharedMaterial: {fileID: 7009212365913637915, guid: 7cd9337368586d74089447414d72a968, type: 2}
@@ -577,7 +575,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.2
+  m_fontSize: 57.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -757,7 +755,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'CURRENT: 0'
+  m_text: "PUNTUACI\xD3N: 0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7cd9337368586d74089447414d72a968, type: 2}
   m_sharedMaterial: {fileID: 7009212365913637915, guid: 7cd9337368586d74089447414d72a968, type: 2}
@@ -1205,7 +1203,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Connect to
+  m_text: 'Conectar a
 
     TWITCH'
   m_isRightToLeft: 0
@@ -1270,7 +1268,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 20, y: 20, z: 20, w: 20}
+  m_margin: {x: 17.30655, y: 20, z: 17.30664, w: 20}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1416,7 +1414,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Please wait...
+  m_text: Un momento, espera...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7cd9337368586d74089447414d72a968, type: 2}
   m_sharedMaterial: {fileID: 7009212365913637915, guid: 7cd9337368586d74089447414d72a968, type: 2}
@@ -2088,7 +2086,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Asking for permissions...
+          m_StringArgument: Pidiendo permisos...
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1573954765

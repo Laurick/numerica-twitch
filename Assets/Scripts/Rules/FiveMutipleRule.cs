@@ -8,7 +8,7 @@ public class FiveMutipleRule : Rule
     
     public FiveMutipleRule() : base()
     {
-        description = "Next number is the next multiple of 5";
+        description = "El siguiente número es el siguiente múltiplo de 5";
     }
 
     public override int ExecutePreConditions(AnswerInfo previous)

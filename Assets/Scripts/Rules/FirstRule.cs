@@ -7,7 +7,7 @@ public class FirstRule : Rule
     
     public FirstRule() : base()
     {
-        description = "Do you know how to count? I don't think so.";
+        description = "¿Sabéis empezar a contar? No lo creo.";
         next = 1;
     }
 

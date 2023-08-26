@@ -6,7 +6,7 @@ public class NextPositiveInt : Rule
     private int next;
     public NextPositiveInt() : base()
     {
-        description = "Do you know how to count? I don't think so.";
+        description = "¿Sabéis contar? No lo creo.";
     }
     
     public override int ExecutePreConditions(AnswerInfo previous)

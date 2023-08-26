@@ -7,7 +7,7 @@ public class NextRandomInt : Rule
     
     public NextRandomInt() : base()
     {
-        description = "Opsie, that was the next number? >:)";
+        description = "Vaya.... ¿ese era el siguiente número? >:)";
         
     }
     

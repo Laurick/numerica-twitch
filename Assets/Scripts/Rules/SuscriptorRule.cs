@@ -6,7 +6,7 @@ public class SuscriptorRule : Rule
     
     public SuscriptorRule() : base()
     {
-        description = "Subscribers only. Subscribe now for play :P";
+        description = "Solo suscriptores. Suscribete para jugar :P";
     }
 
     public override int ExecutePreConditions(AnswerInfo previous)

@@ -6,7 +6,7 @@ public class NextIntInNegative : Rule
     int next;
     public NextIntInNegative() : base()
     {
-        description = "The next number is the next one but in opposite";
+        description = "El siguiente número escribidlo como su opuesto.";
     }
     
     public override int ExecutePreConditions(AnswerInfo previous)

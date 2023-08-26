@@ -6,7 +6,7 @@ public class PreviousPositiveInt : Rule
     private int next;
     public PreviousPositiveInt() : base()
     {
-        description = "Let's count backwards";
+        description = "Contad ahora hacia atrás";
     }
 
     public override int ExecutePreConditions(AnswerInfo previous)

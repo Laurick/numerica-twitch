@@ -6,7 +6,7 @@ public class SlowRule : Rule
     
     public SlowRule() : base()
     {
-        description = "Take it easy. Don't post until 4.16 microfortnights";
+        description = "Con tranquilidad. No pongais el siguiente en... 4.16 microfortnights";
     }
 
     public override int ExecutePreConditions(AnswerInfo previous)

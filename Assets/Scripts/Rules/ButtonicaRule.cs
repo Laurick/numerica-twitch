@@ -9,7 +9,7 @@ public class ButtonicaRule : Rule
     
     public ButtonicaRule() : base()
     {
-        description = "Did you play Buttonica? Let's play Buttonica";
+        description = "¿Has jugado a Buttonica? Jueguemos a Buttonica";
         type = TEXT;
     }
 
